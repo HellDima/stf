@@ -2,9 +2,56 @@
 
 ## HEAD
 
+### Fixes
+
+- Updated [STFService.apk](https://github.com/openstf/STFService.apk) to fix an issue on high aspect ratio devices like the Mi Mix 2 where a portion of the screen may not have been visible.
+- Updated [adbkit-apkreader](https://github.com/openstf/adbkit-apkreader) to resolve issues with certain APK files that were unparseable and therefore could not be installed. The issue was with long strings in the manifest file.
+
+## 3.3.0 (2018-03-25)
+
 ### Enhancements
 
-- Added support for Android O Developer Preview 1
+- Added a new column to the device list that displays the OpenGL ES version of each device. Note that you may have to reset the columns once if you can't see it. Thanks @koral--!
+- Added a new `--no-screen-reset` option to disable the default behavior of resetting rotation and returning to the home screen after a user stops using a device. Thanks @0rzech!
+- Added a new `--saml-id-provider-callback-url` option to the auth-saml2 unit. Thanks @0rzech!
+
+### Fixes
+
+- Fixed a setup issue with TPS650.
+- Fixed an issue where most uploads would fail due to a breaking configuration change in a dependency.
+- Updated [minitouch](https://github.com/openstf/minitouch) to fix multitouch issues on some devices that require the `BTN_TOUCH` kernel event. Lifting a contact while having and keeping one held down may have prevented any events from being processed until a new touchdown event.
+
+## 3.2.0 (2017-12-06)
+
+### Enhancements
+
+- Android 8.1 is now supported.
+- The network column in the device list is now based on a value that gets updated in real time. The format of the column has changed slightly due to this change.
+- The `--mute-master` option now accepts the values `never` (default), `inuse` (only when a device is being used), and `always` (mute pre-emptively during setup phase). For backwards compatibility, `--mute-master` with no value maps to `inuse`, and `--no-mute-master` to `never`.
+- The battery level and battery temperature columns are now filterable with comparison operators.
+- Log output now includes a timestamp.
+
+### Fixes
+
+- Fixed an issue on Windows where our device binaries may have failed to install due to an `Out of fallback locations` error caused by a faulty mode check. Thanks @iqianxing!
+
+## 3.1.0 (2017-08-31)
+
+### Enhancements
+
+- Android 8.0 is now supported. Please note that Android O developer previews are no longer officially supported, though they may or may not still work.
+
+## 3.0.1 (2017-08-21)
+
+### Fixes
+
+- Updated [adbkit](https://github.com/openstf/adbkit) to fix `RangeError: Index out of range` errors when parsing newer APKs that use UTF-8 encoding for their string pools.
+
+## 3.0.0 (2017-08-09)
+
+### Enhancements
+
+- Added support for Android O Developer Preview 1 (note that any later previews are not supported yet)
 - You can now set screen JPEG quality with the `SCREEN_JPEG_QUALITY` environment variable at launch time. Can be useful for slow networks.
 - Switched to [yargs](http://yargs.js.org) for option parsing to make it easier to modify the CLI.
 - Almost all command line options can now be specified with environment variables.
@@ -22,6 +69,7 @@
 - Updated [adbkit](https://github.com/openstf/adbkit) to resolve an issue where trailing spaces in an adb public key would cause an error during adb connect.
 - Updated [adbkit](https://github.com/openstf/adbkit) to resolve issues with log parsing on Android 7.0 and later, caused by Android no longer transforming `\n` to `\r\n`.
 - Updated [adbkit](https://github.com/openstf/adbkit) to resolve an issue with recent versions of ADB that include a null byte in `adbkey.pub`, which was causing validation to fail.
+- Fixed [minitouch](https://github.com/openstf/minitouch) on Blackberry PRIV.
 
 ### Misc
 

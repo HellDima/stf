@@ -135,12 +135,12 @@ module.exports = function DeviceServiceFactory($http, socket, EnhanceDeviceServi
 
       var device = get(data)
       if (device) {
-        modify(device, data)
+        modify(device, event.data)
         notify(event)
       }
       else {
-        if (options.filter(data)) {
-          insert(data)
+        if (options.filter(event.data)) {
+          insert(event.data)
           notify(event)
         }
       }
