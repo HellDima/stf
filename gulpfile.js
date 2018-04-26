@@ -78,7 +78,7 @@ gulp.task('eslint-cli', function(done) {
 
 gulp.task('lint', ['jsonlint', 'eslint-cli'])
 gulp.task('test', ['lint', 'run:checkversion'])
-gulp.task('npm install', ['clean', 'webpack:build'])
+gulp.task('build', ['clean', 'webpack:build'])
 
 gulp.task('run:checkversion', function() {
   gutil.log('Checking STF version...')
