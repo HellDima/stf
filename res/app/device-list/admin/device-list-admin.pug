@@ -19,9 +19,18 @@ div
       td All available devices list
 
     tr
+      td <label style="display: inline-block;">Filter: <input ng-model="searchUsersExists" ng-change="searchSort()"></label><button ng-if="(searchUsersExists!='')" ng-click="resetSearch('searchUsersExists')" class="glyphicon glyphicon-remove" style="width: 36px;height: 25px;"></button>
+      td
+      td <label style="display: inline-block;">Filter: <input ng-model="searchAllUsers" ng-change="searchSort()"></label><button ng-if="(searchAllUsers!='')" ng-click="resetSearch('searchAllUsers')" class="glyphicon glyphicon-remove" style="width: 36px;height: 25px;"></button>
+      td
+      td <label style="display: inline-block;">Filter: <input ng-model="searchDevicesExists" ng-change="searchSort()"></label><button ng-if="(searchDevicesExists!='')" ng-click="resetSearch('searchDevicesExists')" class="glyphicon glyphicon-remove" style="width: 36px;height: 25px;"></button>
+      td
+      td <label style="display: inline-block;">Filter: <input ng-model="searchAllDevices" ng-change="searchSort()"></label><button ng-if="(searchAllDevices!='')" ng-click="resetSearch('searchAllDevices')" class="glyphicon glyphicon-remove" style="width: 36px;height: 25px;"></button>
+
+    tr
       td(width="20%")
         select(name="groupUsers" ng-model="selectedGroupUsers" multiple="multiple" size="10" style="width: 100%;" ng-init="initUsers()")
-          option(value='{{user.email}}' ng-repeat="user in adminGroupUsers") {{user.name}}
+          option(value='{{user.email}}' ng-repeat="user in adminGroupUsers | orderBy: 'email' | filter:searchUsersExists") {{user.email}}
 
       td(width="5%")
         table(align="center")
@@ -34,13 +43,13 @@ div
 
       td(width="20%")
         select(name="allUsers" ng-model="selectedAvailableUsers" multiple="multiple" size="10" style="width: 100%;" ng-init="initUsers()")
-          option(value='{{user.email}}' ng-repeat="user in adminAvailableUsers") {{user.name}}
+          option(value='{{user.email}}' ng-repeat="user in adminAvailableUsers | orderBy: 'email' | filter:searchAllUsers") {{user.email}}
 
       td(width="10%")
 
       td(width="20%")
         select(name="groupDevices" ng-model="selectedGroupDevices" multiple="multiple" size="10" style="width: 100%;")
-          option(value='{{device.serial}}' ng-repeat="device in adminGroupDevices") {{device.model}}
+          option(value='{{device.serial}}' ng-repeat="device in adminGroupDevices| orderBy: 'model' | filter:searchDevicesExists") {{device.model+'('+device.serial+')'}}
 
       td(width="5%")
         table(align="center")
@@ -53,5 +62,5 @@ div
 
       td(width="20%")
         select(name="allDevices" ng-model="selectedAvailableDevices" multiple="multiple" size="10" style="width: 100%;")
-          option(value='{{device.serial}}' ng-repeat="device in adminAvailableDevices") {{device.model}}
+          option(value='{{device.serial}}' ng-repeat="device in adminAvailableDevices| orderBy: 'model' | filter:searchAllDevices") {{device.model+'('+device.serial+')'}}
 
